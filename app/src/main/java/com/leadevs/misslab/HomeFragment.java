@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.leadevs.misslab.adapters.AsistenAdapter;
 import com.leadevs.misslab.adapters.DosenAdapter;
-import com.leadevs.misslab.adapters.PraktikumAdapter;
+import com.leadevs.misslab.adapters.PraktikumHomeAdapter;
 import com.leadevs.misslab.models.Asisten;
 import com.leadevs.misslab.models.Dosen;
 import com.leadevs.misslab.models.Praktikum;
@@ -34,8 +34,8 @@ public class HomeFragment extends Fragment {
 
         List<Praktikum> daftarPraktikum = getDataPraktikum();
 
-        PraktikumAdapter praktikumAdapter = new PraktikumAdapter(getContext(),daftarPraktikum);
-        RVPraktikum.setAdapter(praktikumAdapter);
+        PraktikumHomeAdapter praktikumHomeAdapter = new PraktikumHomeAdapter(getContext(),daftarPraktikum);
+        RVPraktikum.setAdapter(praktikumHomeAdapter);
         RVPraktikum.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
 
         List<Dosen> daftarDosen = getDataDosen();

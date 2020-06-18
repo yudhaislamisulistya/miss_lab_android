@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="175dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/avatar"/>
+        android:src="@drawable/student"/>
 
     <TextView
         android:id="@+id/item_asisten_namalengkap"

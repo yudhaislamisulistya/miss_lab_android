@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/shape_linear_layout"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/TVStatusAbsen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_belum_absen"
+        android:padding="8dp"
+        android:text="Belum Absen"
+        android:textSize="10dp"/>
+
+
+    <TextView
+        android:id="@+id/TVNamaPraktikum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Pemrograman Java lanjut C1"
+        android:textColor="@color/colorWhite"
+        android:fontFamily="@font/kanit_bold"
+        android:textSize="14dp"/>
+
+    <TextView
+        android:id="@+id/TVMulaiAkhirPraktikum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pukul 08.00 - 09.40"
+        android:textColor="@color/colorWhite"
+        android:fontFamily="@font/kanit_regular"
+        android:textSize="12dp"/>
+    
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/TVRuanganPraktikum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lab RPL"
+                android:textColor="@color/colorGrey"
+                android:fontFamily="@font/kanit_regular"/>
+            <TextView
+                android:id="@+id/TVNamaSekarang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yudha Islami Sulistya"
+                android:textColor="@color/colorWhite"
+                android:fontFamily="@font/kanit_regular"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center|end"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Absen"
+                android:textColor="@color/colorWhite"
+                android:padding="10dp"
+                android:background="@drawable/btn_login"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>
