@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="8dp"
+    android:background="@drawable/shape_linear_layout"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:foreground="?attr/selectableItemBackgroundBorderless">
+
+
+    <com.github.siyamed.shapeimageview.RoundedImageView
+        android:id="@+id/item_movie_img"
+        android:layout_width="match_parent"
+        android:layout_height="175dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:siBorderColor="@color/colorPrimary"
+        app:siBorderWidth="3dp"
+        app:siRadius="6dp"
+        android:src="@drawable/noimage"/>
+
+    <TextView
+        android:id="@+id/item_praktikum_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:fontFamily="@font/kanit_regular"
+        android:text="TextView"
+        android:textColor="@color/colorWhite"/>
+</LinearLayout>

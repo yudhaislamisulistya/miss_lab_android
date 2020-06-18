@@ -1,18 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/space"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.luseen.spacenavigation.SpaceNavigationView
+        android:id="@+id/space"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        app:active_centre_button_icon_color="@color/colorWhite"
+        app:centre_button_color="@color/colorPrimaryDark"
+        app:centre_button_icon="@drawable/ic_baseline_home_24"
+        app:inactive_centre_button_icon_color="@color/colorWhite"
+        app:inactive_item_color="@color/colorWhiteSecondary"
+        app:space_background_color="@color/colorPrimary"
+        app:active_centre_button_background_color="@color/colorPrimaryDark"
+        app:space_item_icon_size="24dp" />
+
+</FrameLayout>
