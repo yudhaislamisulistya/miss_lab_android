@@ -18,13 +18,15 @@ import java.util.List;
 
 public class InformasiAdapter extends RecyclerView.Adapter<InformasiAdapter.MyViewHolder> {
 
-    Context context ;
-    List<Informasi> mData;
+    private Context context ;
+    private List<Informasi> mData;
+    private OnInformasiListener onInformasiListener;
 
 
-    public InformasiAdapter(Context context, List<Informasi> mData) {
+    public InformasiAdapter(Context context, List<Informasi> mData, OnInformasiListener onInformasiListener) {
         this.context = context;
         this.mData = mData;
+        this.onInformasiListener = onInformasiListener;
     }
 
 
@@ -32,7 +34,7 @@ public class InformasiAdapter extends RecyclerView.Adapter<InformasiAdapter.MyVi
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_informasi,viewGroup,false);
-        return new MyViewHolder(view);
+        return new MyViewHolder(view, onInformasiListener);
     }
 
     @Override
@@ -46,18 +48,31 @@ public class InformasiAdapter extends RecyclerView.Adapter<InformasiAdapter.MyVi
         return mData.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
         private TextView TVJudul;
         private TextView TVKonten;
+        private OnInformasiListener onInformasiListener;
 
-
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, OnInformasiListener onInformasiListener) {
 
             super(itemView);
             TVJudul = itemView.findViewById(R.id.item_informasi_judul);
             TVKonten = itemView.findViewById(R.id.item_informasi_konten);
+            this.onInformasiListener = onInformasiListener;
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            onInformasiListener.onInformasiClick(getAdapterPosition());
+
+        }
+    }
+
+    public  interface OnInformasiListener{
+        void onInformasiClick(int positition);
     }
 }
