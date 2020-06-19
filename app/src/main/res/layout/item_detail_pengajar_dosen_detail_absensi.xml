@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="125dp"
+    android:layout_marginTop="10dp"
+    android:padding="10dp"
+    android:background="@drawable/shape_linear_layout">
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|left"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/TVStatusAbsen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Berhasil Absen"
+            android:padding="8dp"
+            android:fontFamily="@font/kanit_regular"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/shape_sudah_absen"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|end"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/TVNamaPraktikum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pemrograman Java Lanjut C1"
+            android:textColor="@color/colorWhite"
+            android:fontFamily="@font/kanit_bold"
+            android:gravity="end"
+            android:textSize="16dp"/>
+
+        <TextView
+            android:id="@+id/TVHariWaktuPraktikum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Senin, 08.00 - 09.40"
+            android:textColor="@color/colorWhite"
+            android:fontFamily="@font/kanit_regular"
+            android:textSize="10dp"/>
+        <TextView
+            android:id="@+id/TVRuanganPraktikum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RPL"
+            android:textColor="@color/colorWhite"
+            android:fontFamily="@font/kanit_regular"
+            android:textSize="10dp"/>
+        <TextView
+            android:id="@+id/TVStatusAsisten"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Asisten 1"
+            android:textColor="@color/colorWhite"
+            android:fontFamily="@font/kanit_regular"
+            android:textSize="10dp"/>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

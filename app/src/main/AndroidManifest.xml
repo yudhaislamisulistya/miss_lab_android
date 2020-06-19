@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DetailPengajarAsisten"></activity>
+        <activity android:name=".DetailPengajarDosen"
+            android:theme="@style/Main"></activity>
+        <activity
+            android:name=".DetailPengajarAsisten"
+            android:theme="@style/Main"></activity>
         <activity
             android:name=".DetailInformasi"
             android:theme="@style/Main" />

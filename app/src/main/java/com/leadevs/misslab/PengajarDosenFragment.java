@@ -1,5 +1,6 @@
 package com.leadevs.misslab;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -29,13 +30,14 @@ public class PengajarDosenFragment extends Fragment {
         // Inflate the layout for this fragment
         View root =  inflater.inflate(R.layout.fragment_pengajar_dosen, container, false);
         gridView = root.findViewById(R.id.GVDosen);
-        List<Dosen> daftarAsisten = getDataDosen();
+        final List<Dosen> daftarAsisten = getDataDosen();
         DosenGridViewAdapter dosenAdapter = new DosenGridViewAdapter(getContext(), daftarAsisten);
         gridView.setAdapter(dosenAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println("Berhasil Ditekan");
+                System.out.println(daftarAsisten.get(position).getNamaLengkap());
+                startActivity(new Intent(getContext(), DetailPengajarAsisten.class));
             }
         });
         return root;

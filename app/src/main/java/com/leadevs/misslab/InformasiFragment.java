@@ -39,12 +39,6 @@ public class InformasiFragment extends Fragment implements InformasiAdapter.OnIn
         InformasiAdapter informasiAdapter = new InformasiAdapter(getContext(),daftarInformasi, this);
         RVInformasi.setAdapter(informasiAdapter);
         RVInformasi.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
-        RVInformasi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
         return root;
     }
 

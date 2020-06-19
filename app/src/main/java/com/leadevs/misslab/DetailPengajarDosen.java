@@ -15,7 +15,7 @@ import com.leadevs.misslab.models.Informasi;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DetailPengajarAsisten extends AppCompatActivity implements DetailPengajarAsistenAdapter.OnDetailPengajarListener {
+public class DetailPengajarDosen extends AppCompatActivity implements DetailPengajarAsistenAdapter.OnDetailPengajarListener {
     private RecyclerView RVDetailPengajar;
     ArrayList<DetailPengajar> detailPengajars = new ArrayList<>();
     @Override
