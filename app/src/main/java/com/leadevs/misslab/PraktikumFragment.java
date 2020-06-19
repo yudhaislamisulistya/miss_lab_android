@@ -1,5 +1,6 @@
 package com.leadevs.misslab;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class PraktikumFragment extends Fragment {
+public class PraktikumFragment extends Fragment implements PraktikumAdapter.OnPraktikumListener {
 
     RecyclerView RVPraktikum;
 
@@ -30,7 +31,7 @@ public class PraktikumFragment extends Fragment {
 
         List<Praktikum> daftarPraktikum = getDataPraktikum();
 
-        PraktikumAdapter praktikumAdapter = new PraktikumAdapter(getContext(),daftarPraktikum);
+        PraktikumAdapter praktikumAdapter = new PraktikumAdapter(getContext(),daftarPraktikum, this);
         RVPraktikum.setAdapter(praktikumAdapter);
         RVPraktikum.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         return root;
@@ -42,5 +43,10 @@ public class PraktikumFragment extends Fragment {
         praktikums.add(new Praktikum("Pemrograman Visual"));
         praktikums.add(new Praktikum("Mobile Programming"));
         return praktikums;
+    }
+
+    @Override
+    public void onPraktikumListener(int positition) {
+        startActivity(new Intent(getContext(), DetailPraktikum.class));
     }
 }

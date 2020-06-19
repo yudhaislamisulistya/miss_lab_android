@@ -88,11 +88,11 @@
                         android:layout_width="50dp"
                         android:background="@drawable/circle_avatar"
                         android:layout_height="50dp"
-                        android:gravity="center"
-                        android:onClick="goJadwalScreen">
+                        android:gravity="center">
                         <ImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
+                            android:onClick="goJadwalScreen"
                             android:src="@drawable/jadwal"/>
                     </LinearLayout>
 
@@ -113,11 +113,11 @@
                         android:layout_width="50dp"
                         android:background="@drawable/circle_avatar"
                         android:layout_height="50dp"
-                        android:gravity="center"
-                        android:onClick="goJadwalScreen">
+                        android:gravity="center">
                         <ImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
+                            android:onClick="getRuanganScreen"
                             android:src="@drawable/ruangan"/>
                     </LinearLayout>
 
@@ -138,11 +138,11 @@
                         android:layout_width="50dp"
                         android:background="@drawable/circle_avatar"
                         android:layout_height="50dp"
-                        android:gravity="center"
-                        android:onClick="goJadwalScreen">
+                        android:gravity="center">
                         <ImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
+                            android:onClick="getPengajarScreen"
                             android:src="@drawable/pengajar"/>
                     </LinearLayout>
 
@@ -163,11 +163,11 @@
                         android:layout_width="50dp"
                         android:background="@drawable/circle_avatar"
                         android:layout_height="50dp"
-                        android:gravity="center"
-                        android:onClick="goJadwalScreen">
+                        android:gravity="center">
                         <ImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
+                            android:onClick="getInformasiScreen"
                             android:src="@drawable/inbox"/>
                     </LinearLayout>
 

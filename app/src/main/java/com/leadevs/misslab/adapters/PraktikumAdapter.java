@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.leadevs.misslab.R;
+import com.leadevs.misslab.models.Informasi;
 import com.leadevs.misslab.models.Praktikum;
 
 import java.util.List;
@@ -18,13 +19,15 @@ import java.util.List;
 
 public class PraktikumAdapter extends RecyclerView.Adapter<PraktikumAdapter.MyViewHolder> {
 
-    Context context ;
-    List<Praktikum> mData;
+    private Context context ;
+    private List<Praktikum> mData;
+    private OnPraktikumListener onPraktikumListener;
 
 
-    public PraktikumAdapter(Context context, List<Praktikum> mData) {
+    public PraktikumAdapter(Context context, List<Praktikum> mData, OnPraktikumListener onPraktikumListener) {
         this.context = context;
         this.mData = mData;
+        this.onPraktikumListener = onPraktikumListener;
     }
 
 
@@ -32,16 +35,12 @@ public class PraktikumAdapter extends RecyclerView.Adapter<PraktikumAdapter.MyVi
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_praktikum,viewGroup,false);
-        return new MyViewHolder(view);
+        return new MyViewHolder(view, onPraktikumListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-
-
-        myViewHolder.TvTitle.setText(mData.get(i).getTitle());
-
-
+        myViewHolder.TVNamaPraktikum.setText(mData.get(i).getTitle());
     }
 
     @Override
@@ -49,16 +48,29 @@ public class PraktikumAdapter extends RecyclerView.Adapter<PraktikumAdapter.MyVi
         return mData.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
-        private TextView TvTitle;
+        private TextView TVNamaPraktikum;
+        private OnPraktikumListener onPraktikumListener;
 
-
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, OnPraktikumListener onPraktikumListener) {
 
             super(itemView);
-            TvTitle = itemView.findViewById(R.id.item_praktikum_title);
+            TVNamaPraktikum = itemView.findViewById(R.id.item_praktikum_title);
+            this.onPraktikumListener = onPraktikumListener;
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            onPraktikumListener.onPraktikumListener(getAdapterPosition());
+
+        }
+    }
+
+    public  interface OnPraktikumListener{
+        void onPraktikumListener(int positition);
     }
 }

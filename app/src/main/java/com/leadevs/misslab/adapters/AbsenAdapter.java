@@ -18,13 +18,15 @@ import java.util.List;
 
 public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.MyViewHolder> {
 
-    Context context ;
-    List<Absen> mData;
+    private Context context ;
+    private List<Absen> mData;
+    private OnAbsenListener onAbsenListener;
 
 
-    public AbsenAdapter(Context context, List<Absen> mData) {
+    public AbsenAdapter(Context context, List<Absen> mData, OnAbsenListener onAbsenListener) {
         this.context = context;
         this.mData = mData;
+        this.onAbsenListener = onAbsenListener;
     }
 
 
@@ -32,7 +34,7 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.MyViewHolder
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_absen,viewGroup,false);
-        return new MyViewHolder(view);
+        return new MyViewHolder(view, onAbsenListener);
     }
 
     @Override
@@ -41,7 +43,7 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.MyViewHolder
         myViewHolder.TVNamaPraktikum.setText(mData.get(i).getNamaPraktikum());
         myViewHolder.TVMulaiAkhirPraktikum.setText(mData.get(i).getMulaiAkhirPraktikum());
         myViewHolder.TVRuanganPraktikum.setText(mData.get(i).getRuanganPraktikum());
-        myViewHolder.TVNamaSekarang.setText(mData.get(i).getNamaPraktikum());
+        myViewHolder.TVNamaSekarang.setText(mData.get(i).getNamaSekarang());
     }
 
     @Override
@@ -49,7 +51,7 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.MyViewHolder
         return mData.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
         private TextView TVStatusAbsen;
@@ -57,9 +59,10 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.MyViewHolder
         private TextView TVMulaiAkhirPraktikum;
         private TextView TVRuanganPraktikum;
         private TextView TVNamaSekarang;
+        private OnAbsenListener onAbsenListener;
 
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, OnAbsenListener onAbsenListener ) {
 
             super(itemView);
             TVStatusAbsen = itemView.findViewById(R.id.TVStatusAbsen);
@@ -67,6 +70,17 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.MyViewHolder
             TVMulaiAkhirPraktikum = itemView.findViewById(R.id.TVMulaiAkhirPraktikum);
             TVRuanganPraktikum = itemView.findViewById(R.id.TVRuanganPraktikum);
             TVNamaSekarang = itemView.findViewById(R.id.TVNamaSekarang);
+            this.onAbsenListener = onAbsenListener;
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            onAbsenListener.onAbsenListener(getAdapterPosition());
+        }
+    }
+
+    public  interface OnAbsenListener{
+        void onAbsenListener(int positition);
     }
 }

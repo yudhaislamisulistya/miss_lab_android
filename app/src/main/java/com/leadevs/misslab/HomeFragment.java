@@ -71,7 +71,6 @@ public class HomeFragment extends Fragment {
 
     private ArrayList<Asisten> getDataAsisten(){
         ArrayList<Asisten> asistens = new ArrayList<>();
-
         asistens.add(new Asisten(1, "La Saiman", "13020180214", "Aktif", "Laki - Laki", "Jl. Pulau Papan", "08343434", "https://yudhaislamisulistya.com/gambar.jpg"));
         asistens.add(new Asisten(2, "Kasmira", "13020180214", "Aktif", "Perempuan", "Jl. Pulau Papan", "08343434", "https://yudhaislamisulistya.com/gambar.jpg"));
         asistens.add(new Asisten(3, "Muhamad Trisnandar", "13020180214", "Aktif", "Laki - Laki", "Jl. Pulau Papan", "08343434", "https://yudhaislamisulistya.com/gambar.jpg"));

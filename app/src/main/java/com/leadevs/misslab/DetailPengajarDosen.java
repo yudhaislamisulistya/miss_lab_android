@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -46,6 +47,6 @@ public class DetailPengajarDosen extends AppCompatActivity implements DetailPeng
 
     @Override
     public void onDetailPengajarListener(int positition) {
-
+        startActivity(new Intent(getApplicationContext(), DetailPraktikum.class));
     }
 }

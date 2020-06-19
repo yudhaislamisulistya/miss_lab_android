@@ -74,4 +74,18 @@ public class MainActivity extends AppCompatActivity {
     public void goJadwalScreen(View view) {
         setFragment(absenFragment);
     }
+
+    public void getRuanganScreen(View view) {
+        setFragment(praktikumFragment);
+    }
+
+    public void getPengajarScreen(View view) {
+        setFragment(pengajarFragment);
+    }
+
+    public void getInformasiScreen(View view) {
+        setFragment(infomasiFragment);
+    }
+
+
 }

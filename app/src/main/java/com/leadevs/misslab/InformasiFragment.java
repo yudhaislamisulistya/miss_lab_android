@@ -45,6 +45,7 @@ public class InformasiFragment extends Fragment implements InformasiAdapter.OnIn
     private ArrayList<Informasi> getDataAsisten(){
         informasis.clear();
         informasis.add(new Informasi(1, "Pembayaran Lab", "Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem ", "Asisten", "20 Februari 2020", "21 Maret 2020"));
+        informasis.add(new Informasi(2, "Semester Pendek Lab", "Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem ", "Asisten", "20 Februari 2020", "21 Maret 2020"));
         return informasis;
     }
 

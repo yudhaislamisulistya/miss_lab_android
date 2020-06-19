@@ -61,14 +61,12 @@ public class InformasiAdapter extends RecyclerView.Adapter<InformasiAdapter.MyVi
             TVJudul = itemView.findViewById(R.id.item_informasi_judul);
             TVKonten = itemView.findViewById(R.id.item_informasi_konten);
             this.onInformasiListener = onInformasiListener;
-
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             onInformasiListener.onInformasiClick(getAdapterPosition());
-
         }
     }
 

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="100dp"
+    android:layout_marginRight="10dp"
+    android:layout_height="wrap_content">
+
+    <com.github.siyamed.shapeimageview.CircularImageView
+        android:id="@+id/item_praktikan_foto"
+        android:layout_width="match_parent"
+        android:layout_height="175dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/teacher"/>
+
+    <TextView
+        android:id="@+id/item_praktikan_namalengkap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/kanit_bold"
+        android:gravity="center"
+        android:text="Yudha Islami Sulistya"
+        android:textColor="@color/colorWhite"
+        android:textSize="10dp" />
+
+
+</LinearLayout>
