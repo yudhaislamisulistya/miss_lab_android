@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+import com.leadevs.misslab.ui.praktikan.HomePraktikanActivity;
+
 public class Login extends AppCompatActivity {
 
     EditText ETemail, ETpassword;
@@ -37,5 +40,10 @@ public class Login extends AppCompatActivity {
                     startActivity(new Intent(Login.this, MainActivity.class));
             }
         }, 3000);
+    }
+
+    public void goHomeScreenPraktikan(View view){
+        startActivity(new Intent(Login.this, HomePraktikanActivity.class));
+        Animatoo.animateFade(Login.this);
     }
 }

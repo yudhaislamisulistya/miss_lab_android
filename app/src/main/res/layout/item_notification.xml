@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_linear_layout"
+    android:padding="10dp"
+    android:layout_marginBottom="10dp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_gravity="center"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/ic_baseline_notifications_active_24"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/item_notification_nama_praktikum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pemrograman Java Lanjut C1"
+            android:textColor="@color/colorWhite"
+            android:fontFamily="@font/kanit_bold"/>
+
+        <TextView
+            android:id="@+id/item_notification_notif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Praktikum Akan Dimulai 10 Menit"
+            android:textColor="@color/colorWhite"
+            android:fontFamily="@font/kanit_regular"
+            android:textSize="10dp"/>
+    </LinearLayout>
+</LinearLayout>

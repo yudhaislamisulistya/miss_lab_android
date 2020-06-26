@@ -14,4 +14,14 @@
         <item name="android:statusBarColor">@color/colorPrimaryDark</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
+
+    <style name="HomePraktikanActivity" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/praktikanColorPrimary</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="spinnerTheme">
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
 </resources>

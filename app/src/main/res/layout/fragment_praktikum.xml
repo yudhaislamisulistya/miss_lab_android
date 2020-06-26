@@ -1,39 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimaryDark"
-    tools:context=".PraktikumFragment">
+    tools:context=".PengajarFragment">
 
-    <LinearLayout
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/colorPrimaryDark">
+        android:text="Selamat Datang Tengaa Pengajar" />
 
-        <LinearLayout
-            android:gravity="center|left"
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:id="@+id/appBarLayout">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            app:tabTextColor="@color/colorWhite"
+            app:tabIndicatorColor="@color/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Praktikum"
-                android:fontFamily="@font/kanit_bold"
-                android:textColor="@color/colorWhite"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:textSize="26dp"/>
-        </LinearLayout>
+        </com.google.android.material.tabs.TabLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/RVItemPraktikumFP"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="70dp"/>
-    </LinearLayout>
-</ScrollView>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</FrameLayout>

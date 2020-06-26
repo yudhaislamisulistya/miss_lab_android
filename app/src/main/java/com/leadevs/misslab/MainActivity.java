@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
-import android.widget.Toast;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.luseen.spacenavigation.SpaceItem;
 import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
@@ -57,10 +57,8 @@ public class MainActivity extends AppCompatActivity {
                         return;
                 }
             }
-
             @Override
             public void onItemReselected(int itemIndex, String itemName) {
-                Toast.makeText(MainActivity.this, itemIndex + " " + itemName, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -85,6 +83,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void getInformasiScreen(View view) {
         setFragment(infomasiFragment);
+    }
+
+    public void goNotificationScreen(View view){
+        startActivity(new Intent(this, NotificationActivity.class));
     }
 
 

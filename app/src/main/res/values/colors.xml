@@ -8,4 +8,6 @@
     <color name="colorGreen">#79d70f</color>
     <color name="colorRed">#e71414</color>
     <color name="colorGrey">#e0dede</color>
+    <color name="praktikanColorPrimary">#12cad6</color>
+    <color name="praktikanColorGrey">#f4f4f4</color>
 </resources>
