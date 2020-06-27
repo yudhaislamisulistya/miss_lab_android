@@ -39,8 +39,8 @@ public class PraktikanInformasiAdapter extends RecyclerView.Adapter<PraktikanInf
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        myViewHolder.TVJudul.setText(mData.get(i).getJudul());
-        myViewHolder.TVKonten.setText(mData.get(i).getKonten());
+        myViewHolder.TVJudul.setText(mData.get(i).getTitle());
+        myViewHolder.TVKonten.setText(mData.get(i).getContent());
     }
 
     @Override
@@ -70,7 +70,9 @@ public class PraktikanInformasiAdapter extends RecyclerView.Adapter<PraktikanInf
         }
     }
 
+
     public  interface OnPraktikanInformasiListener{
+
         void onPraktikanInformasiClick(int positition);
     }
 }

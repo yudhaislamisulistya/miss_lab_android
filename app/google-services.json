@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "11394045029",
+    "firebase_url": "https://miss-lab.firebaseio.com",
+    "project_id": "miss-lab",
+    "storage_bucket": "miss-lab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:11394045029:android:87ab8f1090cb6e29b7228c",
+        "android_client_info": {
+          "package_name": "com.leadevs.misslab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "11394045029-q9qijnoda6ots8kqsjl7p7q0jrgorssr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.leadevs.misslab",
+            "certificate_hash": "6b5f24694e391ab94c682cc74524309885538fd5"
+          }
+        },
+        {
+          "client_id": "11394045029-ac53avsqlusp5kuujak46ougqjh79ik5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPtvBIopHqoya6Cnjfow96HQRUyCT1QAk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "11394045029-ac53avsqlusp5kuujak46ougqjh79ik5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -10,6 +10,7 @@
     tools:context=".DetailInformasi">
 
     <TextView
+        android:id="@+id/TVTitleDetailInformasi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Informasi Pembayaran Lab Batas 29 Mei 2020"
@@ -56,6 +57,7 @@
         android:background="@drawable/shape_linear_layout">
 
         <TextView
+            android:id="@+id/TVContentDetailInformasi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"

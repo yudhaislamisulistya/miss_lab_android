@@ -10,43 +10,40 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.firebase.ui.firestore.ObservableSnapshotArray;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.leadevs.misslab.R;
 import com.leadevs.misslab.models.Informasi;
 
 import java.util.List;
 
 
-public class InformasiAdapter extends RecyclerView.Adapter<InformasiAdapter.MyViewHolder> {
+public class InformasiAdapter extends FirestoreRecyclerAdapter<Informasi, InformasiAdapter.MyViewHolder>  {
 
-    private Context context ;
-    private List<Informasi> mData;
-    private OnInformasiListener onInformasiListener;
+    OnInformasiListener onInformasiListener;
 
-
-    public InformasiAdapter(Context context, List<Informasi> mData, OnInformasiListener onInformasiListener) {
-        this.context = context;
-        this.mData = mData;
+    public InformasiAdapter(@NonNull FirestoreRecyclerOptions<Informasi> options, OnInformasiListener onInformasiListener) {
+        super(options);
         this.onInformasiListener = onInformasiListener;
     }
 
+    @Override
+    protected void onBindViewHolder(@NonNull MyViewHolder holder, int position, @NonNull Informasi model) {
+        holder.TVJudul.setText(model.getTitle());
+        holder.TVKonten.setText(model.getContent());
+    }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_informasi,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_informasi,viewGroup,false);
         return new MyViewHolder(view, onInformasiListener);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        myViewHolder.TVJudul.setText(mData.get(i).getJudul());
-        myViewHolder.TVKonten.setText(mData.get(i).getKonten());
-    }
 
-    @Override
-    public int getItemCount() {
-        return mData.size();
-    }
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -66,11 +63,13 @@ public class InformasiAdapter extends RecyclerView.Adapter<InformasiAdapter.MyVi
 
         @Override
         public void onClick(View v) {
-            onInformasiListener.onInformasiClick(getAdapterPosition());
+            int position = getAdapterPosition();
+            onInformasiListener.onInformasiClick(getSnapshots().getSnapshot(getAdapterPosition()), getAdapterPosition());
         }
     }
 
+
     public  interface OnInformasiListener{
-        void onInformasiClick(int positition);
+        void onInformasiClick(DocumentSnapshot documentSnapshot, int positition);
     }
 }

@@ -1,67 +1,74 @@
 package com.leadevs.misslab.models;
 
-public class Informasi {
-    private int id;
-    private String judul;
-    private String konten;
-    private String untuk;
-    private String waktu_buat;
-    private String waktu_ubah;
+import com.google.firebase.Timestamp;
 
-    public Informasi(int id, String judul, String konten, String untuk, String waktu_buat, String waktu_ubah) {
+import java.io.Serializable;
+
+public class Informasi implements Serializable {
+    private String id;
+    private String title;
+    private String content;
+    private String to;
+    private Timestamp created_at;
+    private Timestamp updated_at;
+
+    public Informasi(String id, String title, String content, String to, Timestamp created_at, Timestamp updated_at) {
         this.id = id;
-        this.judul = judul;
-        this.konten = konten;
-        this.untuk = untuk;
-        this.waktu_buat = waktu_buat;
-        this.waktu_ubah = waktu_ubah;
+        this.title = title;
+        this.content = content;
+        this.to = to;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
     }
 
-    public int getId() {
+    public Informasi() {
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getJudul() {
-        return judul;
+    public String getTitle() {
+        return title;
     }
 
-    public void setJudul(String judul) {
-        this.judul = judul;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getKonten() {
-        return konten;
+    public String getContent() {
+        return content;
     }
 
-    public void setKonten(String konten) {
-        this.konten = konten;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getUntuk() {
-        return untuk;
+    public String getTo() {
+        return to;
     }
 
-    public void setUntuk(String untuk) {
-        this.untuk = untuk;
+    public void setTo(String to) {
+        this.to = to;
     }
 
-    public String getWaktu_buat() {
-        return waktu_buat;
+    public Timestamp getCreated_at() {
+        return created_at;
     }
 
-    public void setWaktu_buat(String waktu_buat) {
-        this.waktu_buat = waktu_buat;
+    public void setCreated_at(Timestamp created_at) {
+        this.created_at = created_at;
     }
 
-    public String getWaktu_ubah() {
-        return waktu_ubah;
+    public Timestamp getUpdated_at() {
+        return updated_at;
     }
 
-    public void setWaktu_ubah(String waktu_ubah) {
-        this.waktu_ubah = waktu_ubah;
+    public void setUpdated_at(Timestamp updated_at) {
+        this.updated_at = updated_at;
     }
 }
