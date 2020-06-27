@@ -54,9 +54,9 @@ public class HomeFragment extends Fragment {
 
     private ArrayList<Praktikum> getDataPraktikum(){
         ArrayList<Praktikum> praktikums = new ArrayList<>();
-        praktikums.add(new Praktikum("Pemrograman Java Lanjut"));
-        praktikums.add(new Praktikum("Pemrograman Visual"));
-        praktikums.add(new Praktikum("Mobile Programming"));
+//        praktikums.add(new Praktikum("Pemrograman Java Lanjut"));
+//        praktikums.add(new Praktikum("Pemrograman Visual"));
+//        praktikums.add(new Praktikum("Mobile Programming"));
         return praktikums;
     }
 

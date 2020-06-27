@@ -39,7 +39,7 @@ public class PraktikumHomeAdapter extends RecyclerView.Adapter<PraktikumHomeAdap
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
 
 
-        myViewHolder.TvTitle.setText(mData.get(i).getTitle());
+        myViewHolder.TvTitle.setText(mData.get(i).getName());
 
 
     }

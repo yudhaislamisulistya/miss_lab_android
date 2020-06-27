@@ -1,8 +1,11 @@
 package com.leadevs.misslab;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,10 +14,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.leadevs.misslab.adapters.DosenGridViewAdapter;
 import com.leadevs.misslab.adapters.PraktikumAdapter;
+import com.leadevs.misslab.adapters.PraktikumAdapter.OnPraktikumListener;
+import com.leadevs.misslab.models.Dosen;
 import com.leadevs.misslab.models.Praktikum;
 
 import java.util.ArrayList;
@@ -24,29 +39,73 @@ public class PraktikumGanjilFragment extends Fragment implements PraktikumAdapte
 
     RecyclerView RVPraktikum;
     Spinner spinner;
-
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    CollectionReference collectionReference = db.collection("practicum_schedules");
+    ProgressDialog progressDialog;
+    PraktikumAdapter praktikumAdapter;
+    OnPraktikumListener onPraktikumListener = this;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_praktikum_ganjil, container, false);
         RVPraktikum = root.findViewById(R.id.RVItemPraktikumFP);
+        progressDialog = new ProgressDialog(getContext());
         spinner = root.findViewById(R.id.SHari);
-        spinner.setOnItemSelectedListener(this);
-        List<Praktikum> daftarPraktikum = getDataPraktikum();
+        spinner.getBackground().setColorFilter(getResources().getColor(R.color.colorWhite), PorterDuff.Mode.SRC_ATOP);
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.spinner_nama_hari, R.layout.spinner_item);
 
-        PraktikumAdapter praktikumAdapter = new PraktikumAdapter(getContext(),daftarPraktikum, this);
-        RVPraktikum.setAdapter(praktikumAdapter);
-        RVPraktikum.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinner.setOnItemSelectedListener(this);
+        spinner.setAdapter(adapter);
+        setUpRecycleView("Senin", onPraktikumListener);
         return root;
     }
 
-    private ArrayList<Praktikum> getDataPraktikum(){
-        ArrayList<Praktikum> praktikums = new ArrayList<>();
-        praktikums.add(new Praktikum("Pemrograman Java Lanjut"));
-        praktikums.add(new Praktikum("Pemrograman Visual"));
-        praktikums.add(new Praktikum("Mobile Programming"));
-        return praktikums;
+    public void setUpRecycleView(String hari, final OnPraktikumListener onPraktikumListener){
+        progressDialog.setTitle("Loading Data");
+        progressDialog.show();
+        collectionReference
+                .whereEqualTo("day", hari)
+                .whereEqualTo("semester", "Ganjil")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        List<Praktikum> daftarPraktikum = new ArrayList<>();
+                        if (task.isSuccessful()) {
+                            progressDialog.dismiss();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String id = document.getData().get("id").toString();
+                                String name = document.getData().get("name").toString();
+                                String code = document.getData().get("code").toString();
+                                String class_room = document.getData().get("class_room").toString();
+                                String semester = document.getData().get("semester").toString();
+                                String school_year = document.getData().get("school_year").toString();
+                                String assistant_one = document.getData().get("assistant_one").toString();
+                                String assistant_two = document.getData().get("assistant_two").toString();
+                                String lecture = document.getData().get("lecture").toString();
+                                String department = document.getData().get("department").toString();
+                                String day = document.getData().get("day").toString();
+                                String start_time = document.getData().get("start_time").toString();
+                                String end_time = document.getData().get("end_time").toString();
+                                String name_image = document.getData().get("name_image").toString();
+                                String url_image = document.getData().get("url_image").toString();
+                                Timestamp created_at = document.getTimestamp("created_at");
+                                Timestamp updated_at = document.getTimestamp("updated_at");
+                                daftarPraktikum.add(new Praktikum(id, name, code, class_room, semester, school_year, assistant_one, assistant_two, lecture, department, day, start_time, end_time, name_image, url_image, created_at, updated_at));
+                            }
+                            praktikumAdapter = new PraktikumAdapter(getContext(),daftarPraktikum, onPraktikumListener);
+                            RVPraktikum.setAdapter(praktikumAdapter);
+                            RVPraktikum.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+                        } else {
+                            progressDialog.dismiss();
+                            System.out.println(task.getException());
+                        }
+                    }
+                });
     }
+
 
     @Override
     public void onPraktikumListener(int positition) {
@@ -55,7 +114,7 @@ public class PraktikumGanjilFragment extends Fragment implements PraktikumAdapte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        System.out.println(parent.getSelectedItem().toString());
+        setUpRecycleView(parent.getSelectedItem().toString(), onPraktikumListener);
     }
 
     @Override
