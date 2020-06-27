@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.leadevs.misslab.adapters.DetailPengajarAsistenAdapter;
 import com.leadevs.misslab.adapters.InformasiAdapter;
@@ -19,12 +20,22 @@ import java.util.List;
 public class DetailPengajarDosen extends AppCompatActivity implements DetailPengajarAsistenAdapter.OnDetailPengajarListener {
     private RecyclerView RVDetailPengajar;
     ArrayList<DetailPengajar> detailPengajars = new ArrayList<>();
+    private TextView fullname;
+    private TextView phone;
+    private TextView gender;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_pengajar_asisten);
+        setContentView(R.layout.activity_detail_pengajar_dosen);
+        fullname = findViewById(R.id.TVDetailPDNamaLengkap);
+        phone = findViewById(R.id.TVDetailPDNoTelp);
+        gender = findViewById(R.id.TVDetailPDJenisKelamin);
 
-        RVDetailPengajar = findViewById(R.id.RVItemDetailPengajarAsisten);
+        fullname.setText(getIntent().getStringExtra("fullname"));
+        phone.setText(getIntent().getStringExtra("phone"));
+        gender.setText(getIntent().getStringExtra("gender"));
+
+        RVDetailPengajar = findViewById(R.id.RVItemDetailPengajarDosen);
 
         List<DetailPengajar> daftarDetailPengajar = getDetailPengajar();
 

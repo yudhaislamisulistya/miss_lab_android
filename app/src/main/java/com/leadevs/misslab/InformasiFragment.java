@@ -1,5 +1,6 @@
 package com.leadevs.misslab;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.icu.text.Transliterator;
 import android.os.Bundle;
@@ -44,18 +45,22 @@ public class InformasiFragment extends Fragment implements InformasiAdapter.OnIn
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     CollectionReference collectionReference = db.collection("informations");
     InformasiAdapter informasiAdapter;
-
+    ProgressDialog progressDialog;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_informasi, container, false);
         RVInformasi = root.findViewById(R.id.RVItemInformasi);
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setTitle("Loading Data Informasi");
+        progressDialog.show();
         setUpRecycleView();
         return root;
     }
 
     public void setUpRecycleView() {
+        progressDialog.dismiss();
         Query query = collectionReference.orderBy("created_at", Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<Informasi> firestoreRecyclerOptions = new FirestoreRecyclerOptions.Builder<Informasi>()
                 .setQuery(query, Informasi.class)

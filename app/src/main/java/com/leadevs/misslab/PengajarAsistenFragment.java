@@ -64,8 +64,17 @@ public class PengajarAsistenFragment extends Fragment {
                             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                    System.out.println(daftarAsisten.get(position).getFullname());
-                                    startActivity(new Intent(getContext(), DetailPengajarAsisten.class));
+                                    Intent intent = new Intent(getContext(), DetailPengajarAsisten.class);
+                                    intent.putExtra("id", daftarAsisten.get(position).getId());
+                                    intent.putExtra("id_user", daftarAsisten.get(position).getId_user());
+                                    intent.putExtra("fullname", daftarAsisten.get(position).getFullname());
+                                    intent.putExtra("stambuk", daftarAsisten.get(position).getStambuk());
+                                    intent.putExtra("status_active", daftarAsisten.get(position).getStatus_active());
+                                    intent.putExtra("gender", daftarAsisten.get(position).getGender());
+                                    intent.putExtra("phone", daftarAsisten.get(position).getPhone());
+                                    intent.putExtra("address", daftarAsisten.get(position).getAddress());
+                                    intent.putExtra("url_image", daftarAsisten.get(position).getUrl_image());
+                                    startActivity(intent);
                                 }
                             });
                         } else {
@@ -73,7 +82,6 @@ public class PengajarAsistenFragment extends Fragment {
                         }
                     }
                 });
-
         return root;
     }
 }
