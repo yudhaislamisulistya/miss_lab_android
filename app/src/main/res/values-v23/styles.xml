@@ -16,7 +16,7 @@
     </style>
 
     <style name="HomePraktikanActivity" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:statusBarColor">@color/praktikanColorPrimary</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
 

@@ -1,6 +1,5 @@
 package com.leadevs.misslab.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.firebase.ui.firestore.ObservableSnapshotArray;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.leadevs.misslab.R;
 import com.leadevs.misslab.models.Informasi;
-
-import java.util.List;
 
 
 public class InformasiAdapter extends FirestoreRecyclerAdapter<Informasi, InformasiAdapter.MyViewHolder>  {

@@ -1,36 +1,60 @@
 package com.leadevs.misslab.models;
 
-public class Dosen {
-    private int id;
-    private String namaLengkap;
-    private String nidn;
-    private String jenisKelamin;
-    private String phone;
-    private String foto;
+import com.google.firebase.Timestamp;
 
-    public Dosen(int id, String namaLengkap, String nidn, String jenisKelamin, String phone, String foto) {
+import java.io.Serializable;
+
+public class Dosen implements Serializable {
+    private String id;
+    private String id_user;
+    private String fullname;
+    private String nidn;
+    private String gender;
+    private String phone;
+    private String name_image;
+    private String url_image;
+    private Timestamp created_at;
+    private Timestamp updated_at;
+
+    public Dosen(String id, String id_user, String fullname, String nidn, String gender, String phone, String name_image, String url_image, Timestamp created_at, Timestamp updated_at) {
         this.id = id;
-        this.namaLengkap = namaLengkap;
+        this.id_user = id_user;
+        this.fullname = fullname;
         this.nidn = nidn;
-        this.jenisKelamin = jenisKelamin;
+        this.gender = gender;
         this.phone = phone;
-        this.foto = foto;
+        this.name_image = name_image;
+        this.url_image = url_image;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
     }
 
-    public int getId() {
+    public Dosen(){
+
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getNamaLengkap() {
-        return namaLengkap;
+    public String getId_user() {
+        return id_user;
     }
 
-    public void setNamaLengkap(String namaLengkap) {
-        this.namaLengkap = namaLengkap;
+    public void setId_user(String id_user) {
+        this.id_user = id_user;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     public String getNidn() {
@@ -41,12 +65,12 @@ public class Dosen {
         this.nidn = nidn;
     }
 
-    public String getJenisKelamin() {
-        return jenisKelamin;
+    public String getGender() {
+        return gender;
     }
 
-    public void setJenisKelamin(String jenisKelamin) {
-        this.jenisKelamin = jenisKelamin;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getPhone() {
@@ -57,11 +81,35 @@ public class Dosen {
         this.phone = phone;
     }
 
-    public String getFoto() {
-        return foto;
+    public String getName_image() {
+        return name_image;
     }
 
-    public void setFoto(String foto) {
-        this.foto = foto;
+    public void setName_image(String name_image) {
+        this.name_image = name_image;
+    }
+
+    public String getUrl_image() {
+        return url_image;
+    }
+
+    public void setUrl_image(String url_image) {
+        this.url_image = url_image;
+    }
+
+    public Timestamp getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Timestamp created_at) {
+        this.created_at = created_at;
+    }
+
+    public Timestamp getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(Timestamp updated_at) {
+        this.updated_at = updated_at;
     }
 }

@@ -37,7 +37,7 @@ public class DosenAdapter extends RecyclerView.Adapter<DosenAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        myViewHolder.TVNamaLengkap.setText(mData.get(i).getNamaLengkap());
+        myViewHolder.TVNamaLengkap.setText(mData.get(i).getFullname());
     }
 
     @Override

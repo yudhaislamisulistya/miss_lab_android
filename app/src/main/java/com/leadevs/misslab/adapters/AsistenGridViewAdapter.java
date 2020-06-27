@@ -48,7 +48,7 @@ public class AsistenGridViewAdapter extends BaseAdapter {
         }
 
         TextView TVNamaLengkap = (TextView) convertView.findViewById(R.id.item_asisten_namalengkap);
-        TVNamaLengkap.setText(mData.get(position).getNamaLengkap());
+        TVNamaLengkap.setText(mData.get(position).getFullname());
 
         return convertView;
     }

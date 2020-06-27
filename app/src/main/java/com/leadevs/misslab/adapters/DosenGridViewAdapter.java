@@ -49,7 +49,7 @@ public class DosenGridViewAdapter extends BaseAdapter {
         }
 
         TextView TVNamaLengkap = (TextView) convertView.findViewById(R.id.item_dosen_namalengkap);
-        TVNamaLengkap.setText(mData.get(position).getNamaLengkap());
+        TVNamaLengkap.setText(mData.get(position).getFullname());
 
         return convertView;
     }

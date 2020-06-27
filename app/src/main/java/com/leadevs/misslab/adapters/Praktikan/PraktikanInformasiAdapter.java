@@ -1,6 +1,5 @@
 package com.leadevs.misslab.adapters.Praktikan;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,43 +9,37 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.leadevs.misslab.R;
 import com.leadevs.misslab.models.Informasi;
 
-import java.util.List;
 
+public class PraktikanInformasiAdapter extends FirestoreRecyclerAdapter<Informasi, PraktikanInformasiAdapter.MyViewHolder>  {
 
-public class PraktikanInformasiAdapter extends RecyclerView.Adapter<PraktikanInformasiAdapter.MyViewHolder> {
+    OnPraktikanInformasiListener onPraktikanInformasiListener;
 
-    private Context context ;
-    private List<Informasi> mData;
-    private OnPraktikanInformasiListener onPraktikanInformasiListener;
-
-
-    public PraktikanInformasiAdapter(Context context, List<Informasi> mData, OnPraktikanInformasiListener onPraktikanInformasiListener) {
-        this.context = context;
-        this.mData = mData;
+    public PraktikanInformasiAdapter(@NonNull FirestoreRecyclerOptions<Informasi> options, OnPraktikanInformasiListener onPraktikanInformasiListener) {
+        super(options);
         this.onPraktikanInformasiListener = onPraktikanInformasiListener;
     }
 
+    @Override
+    protected void onBindViewHolder(@NonNull MyViewHolder holder, int position, @NonNull Informasi model) {
+        holder.TVJudul.setText(model.getTitle());
+        holder.TVKonten.setText(model.getContent());
+    }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.praktikan_item_informasi,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.praktikan_item_informasi,viewGroup,false);
         return new MyViewHolder(view, onPraktikanInformasiListener);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        myViewHolder.TVJudul.setText(mData.get(i).getTitle());
-        myViewHolder.TVKonten.setText(mData.get(i).getContent());
-    }
 
-    @Override
-    public int getItemCount() {
-        return mData.size();
-    }
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -66,13 +59,13 @@ public class PraktikanInformasiAdapter extends RecyclerView.Adapter<PraktikanInf
 
         @Override
         public void onClick(View v) {
-            onPraktikanInformasiListener.onPraktikanInformasiClick(getAdapterPosition());
+            int position = getAdapterPosition();
+            onPraktikanInformasiListener.onPraktikanInformasiClick(getSnapshots().getSnapshot(getAdapterPosition()), getAdapterPosition());
         }
     }
 
 
     public  interface OnPraktikanInformasiListener{
-
-        void onPraktikanInformasiClick(int positition);
+        void onPraktikanInformasiClick(DocumentSnapshot documentSnapshot, int positition);
     }
 }

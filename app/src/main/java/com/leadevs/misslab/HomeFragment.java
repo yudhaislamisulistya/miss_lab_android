@@ -62,19 +62,19 @@ public class HomeFragment extends Fragment {
 
     private ArrayList<Dosen> getDataDosen(){
         ArrayList<Dosen> dosens = new ArrayList<>();
-        dosens.add(new Dosen(1, "Yudha Islami Sulistya", "0909012220", "Laki - Laki", "085340472927", "https://facebook.com/adsad"));
-        dosens.add(new Dosen(2, "Huzain Azis, S.Kom, M.Cs", "0909042434", "Laki - Laki", "08662323233", "https://facebook.com/adsad"));
-        dosens.add(new Dosen(3, "Abdul Rachman Manga, S.Kom, M.Eng", "0992392933", "Laki - Laki", "088329382398", "https://facebook.com/adsad"));
-        dosens.add(new Dosen(4, "Lilis Nurhayati, S.Kom, M.Eng", "0992392933", "Laki - Laki", "088329382398", "https://facebook.com/adsad"));
+//        dosens.add(new Dosen(1, "Yudha Islami Sulistya", "0909012220", "Laki - Laki", "085340472927", "https://facebook.com/adsad"));
+//        dosens.add(new Dosen(2, "Huzain Azis, S.Kom, M.Cs", "0909042434", "Laki - Laki", "08662323233", "https://facebook.com/adsad"));
+//        dosens.add(new Dosen(3, "Abdul Rachman Manga, S.Kom, M.Eng", "0992392933", "Laki - Laki", "088329382398", "https://facebook.com/adsad"));
+//        dosens.add(new Dosen(4, "Lilis Nurhayati, S.Kom, M.Eng", "0992392933", "Laki - Laki", "088329382398", "https://facebook.com/adsad"));
         return dosens;
     }
 
     private ArrayList<Asisten> getDataAsisten(){
         ArrayList<Asisten> asistens = new ArrayList<>();
-        asistens.add(new Asisten(1, "La Saiman", "13020180214", "Aktif", "Laki - Laki", "Jl. Pulau Papan", "08343434", "https://yudhaislamisulistya.com/gambar.jpg"));
-        asistens.add(new Asisten(2, "Kasmira", "13020180214", "Aktif", "Perempuan", "Jl. Pulau Papan", "08343434", "https://yudhaislamisulistya.com/gambar.jpg"));
-        asistens.add(new Asisten(3, "Muhamad Trisnandar", "13020180214", "Aktif", "Laki - Laki", "Jl. Pulau Papan", "08343434", "https://yudhaislamisulistya.com/gambar.jpg"));
-        asistens.add(new Asisten(4, "Ericha Apriliyani", "13020180214", "Aktif", "Laki - Laki", "Jl. Pulau Papan", "08343434", "https://yudhaislamisulistya.com/gambar.jpg"));
+//        asistens.add(new Asisten(1, "La Saiman", "13020180214", "Aktif", "Laki - Laki", "Jl. Pulau Papan", "08343434", "https://yudhaislamisulistya.com/gambar.jpg"));
+//        asistens.add(new Asisten(2, "Kasmira", "13020180214", "Aktif", "Perempuan", "Jl. Pulau Papan", "08343434", "https://yudhaislamisulistya.com/gambar.jpg"));
+//        asistens.add(new Asisten(3, "Muhamad Trisnandar", "13020180214", "Aktif", "Laki - Laki", "Jl. Pulau Papan", "08343434", "https://yudhaislamisulistya.com/gambar.jpg"));
+//        asistens.add(new Asisten(4, "Ericha Apriliyani", "13020180214", "Aktif", "Laki - Laki", "Jl. Pulau Papan", "08343434", "https://yudhaislamisulistya.com/gambar.jpg"));
         return asistens;
     }
 

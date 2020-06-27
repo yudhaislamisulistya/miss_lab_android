@@ -41,10 +41,8 @@ import java.util.List;
 public class InformasiFragment extends Fragment implements InformasiAdapter.OnInformasiListener {
 
     private RecyclerView RVInformasi;
-    ArrayList<Informasi> informasis = new ArrayList<>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     CollectionReference collectionReference = db.collection("informations");
-    InformasiAdapter.OnInformasiListener onInformasiListener;
     InformasiAdapter informasiAdapter;
 
     @Override
@@ -53,26 +51,6 @@ public class InformasiFragment extends Fragment implements InformasiAdapter.OnIn
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_informasi, container, false);
         RVInformasi = root.findViewById(R.id.RVItemInformasi);
-        onInformasiListener = this;
-//        db.collection("informations")
-//                .get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        List<Informasi> daftarInformasi = new ArrayList<>();
-//                        if (task.isSuccessful()) {
-//                            informasis.clear();
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
-//                                daftarInformasi.add(new Informasi(document.getData().get("id").toString(), document.getData().get("title").toString(), document.getData().get("content").toString(), document.getData().get("for").toString(), document.getData().get("created_at").toString(), document.getData().get("updated_at").toString()));
-//                            }
-//                            informasiAdapter = new InformasiAdapter(getContext(),daftarInformasi, onInformasiListener);
-//                            RVInformasi.setAdapter(informasiAdapter);
-//                            RVInformasi.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
-//                        } else {
-//                            System.out.println(task.getException());
-//                        }
-//                    }
-//                });
         setUpRecycleView();
         return root;
     }
@@ -85,8 +63,6 @@ public class InformasiFragment extends Fragment implements InformasiAdapter.OnIn
         informasiAdapter = new InformasiAdapter(firestoreRecyclerOptions, this);
         RVInformasi.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         RVInformasi.setAdapter(informasiAdapter);
-
-
     }
 
 

@@ -39,7 +39,7 @@ public class AsistenAdapter extends RecyclerView.Adapter<AsistenAdapter.MyViewHo
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
 
 
-        myViewHolder.TVNamaLengkap.setText(mData.get(i).getNamaLengkap());
+        myViewHolder.TVNamaLengkap.setText(mData.get(i).getFullname());
 
 
     }
