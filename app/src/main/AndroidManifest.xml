@@ -9,12 +9,17 @@
         android:roundIcon="@drawable/iclabs"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NotificationActivity"
+        <activity
+            android:name=".ui.praktikan.PraktikanActiveLabAsistenActivity"
+            android:theme="@style/Main">
+        </activity>
+        <activity
+            android:name=".NotificationActivity"
             android:theme="@style/Main">
         </activity>
         <activity
             android:name=".ui.praktikan.HomePraktikanActivity"
-            android:theme="@style/HomePraktikanActivity"></activity>
+            android:theme="@style/HomePraktikanActivity" />
         <activity
             android:name=".DetailPraktikum"
             android:theme="@style/Main" />

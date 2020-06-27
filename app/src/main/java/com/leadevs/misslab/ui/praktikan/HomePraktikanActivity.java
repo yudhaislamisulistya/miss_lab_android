@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
@@ -14,7 +15,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.leadevs.misslab.DetailInformasi;
 import com.leadevs.misslab.R;
-import com.leadevs.misslab.adapters.InformasiAdapter;
 import com.leadevs.misslab.adapters.Praktikan.PraktikanInformasiAdapter;
 import com.leadevs.misslab.models.Informasi;
 
@@ -65,5 +65,9 @@ public class HomePraktikanActivity extends AppCompatActivity implements Praktika
         intent.putExtra("title", informasi.getTitle());
         intent.putExtra("content", informasi.getContent());
         startActivity(intent);
+    }
+
+    public void goActiveLabAsistenScreen(View view){
+        startActivity(new Intent(this, PraktikanActiveLabAsistenActivity.class));
     }
 }
