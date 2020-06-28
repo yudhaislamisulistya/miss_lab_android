@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:isScrollContainer="true"
     tools:context=".HomeFragment">
-
-
 
 
     <LinearLayout
@@ -50,16 +50,27 @@
                 android:gravity="center|left"
                 android:layout_marginLeft="10dp">
                 <TextView
+                    android:id="@+id/TVHomeFragmentNamaLengkap"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Yudha Islami Sulistya"
                     android:textColor="@color/colorWhite"
                     android:textStyle="bold"/>
                 <TextView
+                    android:id="@+id/TVHomeFragmentStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="10dp"
                     android:text="Asisten"
+                    android:textColor="@color/colorWhite"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10dp"
+                    android:text="Keluar"
+                    android:onClick="goLoginScreen"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/shape_terlambat"
                     android:textColor="@color/colorWhite"/>
             </LinearLayout>
             <LinearLayout

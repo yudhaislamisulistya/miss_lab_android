@@ -1,5 +1,6 @@
 package com.leadevs.misslab;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,9 +11,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.leadevs.misslab.adapters.AsistenAdapter;
 import com.leadevs.misslab.adapters.DosenAdapter;
+import com.leadevs.misslab.adapters.PraktikumAdapter;
 import com.leadevs.misslab.adapters.PraktikumHomeAdapter;
 import com.leadevs.misslab.models.Asisten;
 import com.leadevs.misslab.models.Dosen;
@@ -23,59 +36,176 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
     private RecyclerView RVPraktikum, RVDosen, RVAsisten;
+    private TextView TVHomeFragmentStatus, TVHomeFragmentNamaLengkap;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    CollectionReference collectionReferencePraktikum = db.collection("practicum_schedules");
+    CollectionReference collectionReferenceDosen = db.collection("lectures");
+    CollectionReference collectionReferenceAsisten = db.collection("assistants");
+    CollectionReference collectionReferenceUser = db.collection("users");
+    ProgressDialog progressDialog;
+    PraktikumHomeAdapter praktikumHomeAdapter;
+    AsistenAdapter asistenAdapter;
+    DosenAdapter dosenAdapter;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root =  inflater.inflate(R.layout.fragment_home, container, false);
+        View root = inflater.inflate(R.layout.fragment_home, container, false);
         RVPraktikum = root.findViewById(R.id.RVItemPraktikum);
         RVDosen = root.findViewById(R.id.RVItemDosen);
         RVAsisten = root.findViewById(R.id.RVItemAsisten);
-
-        List<Praktikum> daftarPraktikum = getDataPraktikum();
-
-        PraktikumHomeAdapter praktikumHomeAdapter = new PraktikumHomeAdapter(getContext(),daftarPraktikum);
-        RVPraktikum.setAdapter(praktikumHomeAdapter);
-        RVPraktikum.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
-
-        List<Dosen> daftarDosen = getDataDosen();
-
-        DosenAdapter dosenAdapter = new DosenAdapter(getContext(),daftarDosen);
-        RVDosen.setAdapter(dosenAdapter);
-        RVDosen.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
-
-        List<Asisten> daftarAsisten = getDataAsisten();
-
-        AsistenAdapter asistenAdapter = new AsistenAdapter(getContext(),daftarAsisten);
-        RVAsisten.setAdapter(asistenAdapter);
-        RVAsisten.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+        TVHomeFragmentNamaLengkap = root.findViewById(R.id.TVHomeFragmentNamaLengkap);
+        TVHomeFragmentStatus = root.findViewById(R.id.TVHomeFragmentStatus);
+        progressDialog = new ProgressDialog(getContext());
+        updateNamaLengkapDanStatus(user.getUid());
+        setUpRecycleViewPraktikum();
+        setUpRecycleViewAsisten();
+        setUpRecycleViewDosen();
         return root;
     }
 
-    private ArrayList<Praktikum> getDataPraktikum(){
-        ArrayList<Praktikum> praktikums = new ArrayList<>();
-//        praktikums.add(new Praktikum("Pemrograman Java Lanjut"));
-//        praktikums.add(new Praktikum("Pemrograman Visual"));
-//        praktikums.add(new Praktikum("Mobile Programming"));
-        return praktikums;
+    public void updateNamaLengkapDanStatus(String id){
+        collectionReferenceUser
+                .whereEqualTo("id", id)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            progressDialog.dismiss();
+                            int i = 0;
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                TVHomeFragmentNamaLengkap.setText(document.getData().get("fullname").toString());
+                                TVHomeFragmentStatus.setText(document.getData().get("status").toString());
+                            }
+                        } else {
+                            progressDialog.dismiss();
+                            System.out.println(task.getException());
+                        }
+                    }
+                });
     }
 
-    private ArrayList<Dosen> getDataDosen(){
-        ArrayList<Dosen> dosens = new ArrayList<>();
-//        dosens.add(new Dosen(1, "Yudha Islami Sulistya", "0909012220", "Laki - Laki", "085340472927", "https://facebook.com/adsad"));
-//        dosens.add(new Dosen(2, "Huzain Azis, S.Kom, M.Cs", "0909042434", "Laki - Laki", "08662323233", "https://facebook.com/adsad"));
-//        dosens.add(new Dosen(3, "Abdul Rachman Manga, S.Kom, M.Eng", "0992392933", "Laki - Laki", "088329382398", "https://facebook.com/adsad"));
-//        dosens.add(new Dosen(4, "Lilis Nurhayati, S.Kom, M.Eng", "0992392933", "Laki - Laki", "088329382398", "https://facebook.com/adsad"));
-        return dosens;
+    public void setUpRecycleViewDosen(){
+        progressDialog.setTitle("Loading Data");
+        progressDialog.show();
+        collectionReferenceDosen
+                .limit(5)
+                .orderBy("created_at", Query.Direction.DESCENDING)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        List<Dosen> daftarDosen = new ArrayList<>();
+                        if (task.isSuccessful()) {
+                            progressDialog.dismiss();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String id = document.getData().get("id").toString();
+                                String id_user = document.getData().get("id_user").toString();
+                                String fullname = document.getData().get("fullname").toString();
+                                String nidn = document.getData().get("nidn").toString();
+                                String gender = document.getData().get("gender").toString();
+                                String phone = document.getData().get("phone").toString();
+                                String name_image = document.getData().get("name_image").toString();
+                                String url_image = document.getData().get("url_image").toString();
+                                Timestamp created_at = document.getTimestamp("created_at");
+                                Timestamp updated_at = document.getTimestamp("updated_at");
+                                daftarDosen.add(new Dosen(id, id_user, fullname, nidn, gender, phone, name_image, url_image, created_at, updated_at));
+                            }
+                            dosenAdapter = new DosenAdapter(getContext(), daftarDosen);
+                            RVDosen.setAdapter(dosenAdapter);
+                            RVDosen.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+                        } else {
+                            progressDialog.dismiss();
+                            System.out.println(task.getException());
+                        }
+                    }
+                });
     }
 
-    private ArrayList<Asisten> getDataAsisten(){
-        ArrayList<Asisten> asistens = new ArrayList<>();
-//        asistens.add(new Asisten(1, "La Saiman", "13020180214", "Aktif", "Laki - Laki", "Jl. Pulau Papan", "08343434", "https://yudhaislamisulistya.com/gambar.jpg"));
-//        asistens.add(new Asisten(2, "Kasmira", "13020180214", "Aktif", "Perempuan", "Jl. Pulau Papan", "08343434", "https://yudhaislamisulistya.com/gambar.jpg"));
-//        asistens.add(new Asisten(3, "Muhamad Trisnandar", "13020180214", "Aktif", "Laki - Laki", "Jl. Pulau Papan", "08343434", "https://yudhaislamisulistya.com/gambar.jpg"));
-//        asistens.add(new Asisten(4, "Ericha Apriliyani", "13020180214", "Aktif", "Laki - Laki", "Jl. Pulau Papan", "08343434", "https://yudhaislamisulistya.com/gambar.jpg"));
-        return asistens;
+    public void setUpRecycleViewAsisten(){
+        progressDialog.setTitle("Loading Data");
+        progressDialog.show();
+        collectionReferenceAsisten
+                .limit(5)
+                .orderBy("created_at", Query.Direction.DESCENDING)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        List<Asisten> daftarAsisten = new ArrayList<>();
+                        if (task.isSuccessful()) {
+                            progressDialog.dismiss();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String id = document.getData().get("id").toString();
+                                String id_user = document.getData().get("id_user").toString();
+                                String fullname = document.getData().get("fullname").toString();
+                                String stambuk = document.getData().get("stambuk").toString();
+                                String status_active = document.getData().get("status_active").toString();
+                                String gender = document.getData().get("gender").toString();
+                                String phone = document.getData().get("phone").toString();
+                                String address = document.getData().get("address").toString();
+                                String name_image = document.getData().get("name_image").toString();
+                                String url_image = document.getData().get("url_image").toString();
+                                Timestamp created_at = document.getTimestamp("created_at");
+                                Timestamp updated_at = document.getTimestamp("updated_at");
+                                daftarAsisten.add(new Asisten(id, id_user, fullname, stambuk, status_active, gender, phone, address, name_image, url_image, created_at, updated_at));
+                            }
+                            asistenAdapter = new AsistenAdapter(getContext(), daftarAsisten);
+                            RVAsisten.setAdapter(asistenAdapter);
+                            RVAsisten.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+                        } else {
+                            progressDialog.dismiss();
+                            System.out.println(task.getException());
+                        }
+                    }
+                });
     }
+
+    public void setUpRecycleViewPraktikum() {
+        progressDialog.setTitle("Loading Data");
+        progressDialog.show();
+        collectionReferencePraktikum
+                .limit(5)
+                .orderBy("created_at", Query.Direction.DESCENDING)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        List<Praktikum> daftarPraktikum = new ArrayList<>();
+                        if (task.isSuccessful()) {
+                            progressDialog.dismiss();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String id = document.getData().get("id").toString();
+                                String name = document.getData().get("name").toString();
+                                String code = document.getData().get("code").toString();
+                                String class_room = document.getData().get("class_room").toString();
+                                String semester = document.getData().get("semester").toString();
+                                String school_year = document.getData().get("school_year").toString();
+                                String assistant_one = document.getData().get("assistant_one").toString();
+                                String assistant_two = document.getData().get("assistant_two").toString();
+                                String lecture = document.getData().get("lecture").toString();
+                                String department = document.getData().get("department").toString();
+                                String day = document.getData().get("day").toString();
+                                String start_time = document.getData().get("start_time").toString();
+                                String end_time = document.getData().get("end_time").toString();
+                                String name_image = document.getData().get("name_image").toString();
+                                String url_image = document.getData().get("url_image").toString();
+                                Timestamp created_at = document.getTimestamp("created_at");
+                                Timestamp updated_at = document.getTimestamp("updated_at");
+                                daftarPraktikum.add(new Praktikum(id, name, code, class_room, semester, school_year, assistant_one, assistant_two, lecture, department, day, start_time, end_time, name_image, url_image, created_at, updated_at));
+                            }
+                            praktikumHomeAdapter = new PraktikumHomeAdapter(getContext(), daftarPraktikum);
+                            RVPraktikum.setAdapter(praktikumHomeAdapter);
+                            RVPraktikum.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+                        } else {
+                            progressDialog.dismiss();
+                            System.out.println(task.getException());
+                        }
+                    }
+                });
+    }
+
 
 }

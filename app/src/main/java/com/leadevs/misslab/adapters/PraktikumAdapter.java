@@ -40,7 +40,7 @@ public class PraktikumAdapter extends RecyclerView.Adapter<PraktikumAdapter.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        myViewHolder.TVNamaPraktikum.setText(mData.get(i).getName());
+        myViewHolder.TVNamaPraktikum.setText(mData.get(i).getName() + " " + mData.get(i).getCode());
     }
 
     @Override

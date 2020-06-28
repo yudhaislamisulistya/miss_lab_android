@@ -16,20 +16,16 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.leadevs.misslab.adapters.DosenGridViewAdapter;
 import com.leadevs.misslab.adapters.PraktikumAdapter;
 import com.leadevs.misslab.adapters.PraktikumAdapter.OnPraktikumListener;
-import com.leadevs.misslab.models.Dosen;
 import com.leadevs.misslab.models.Praktikum;
 
 import java.util.ArrayList;
@@ -44,6 +40,7 @@ public class PraktikumGanjilFragment extends Fragment implements PraktikumAdapte
     ProgressDialog progressDialog;
     PraktikumAdapter praktikumAdapter;
     OnPraktikumListener onPraktikumListener = this;
+    List<Praktikum> daftarPraktikum = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -72,7 +69,7 @@ public class PraktikumGanjilFragment extends Fragment implements PraktikumAdapte
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        List<Praktikum> daftarPraktikum = new ArrayList<>();
+                        daftarPraktikum = new ArrayList<>();
                         if (task.isSuccessful()) {
                             progressDialog.dismiss();
                             for (QueryDocumentSnapshot document : task.getResult()) {
@@ -109,7 +106,25 @@ public class PraktikumGanjilFragment extends Fragment implements PraktikumAdapte
 
     @Override
     public void onPraktikumListener(int positition) {
-        startActivity(new Intent(getContext(), DetailPraktikum.class));
+        Intent intent = new Intent(getContext(), DetailPraktikum.class);
+        intent.putExtra("id", daftarPraktikum.get(positition).getId());
+        intent.putExtra("name", daftarPraktikum.get(positition).getName());
+        intent.putExtra("code", daftarPraktikum.get(positition).getCode());
+        intent.putExtra("class_room", daftarPraktikum.get(positition).getClass_room());
+        intent.putExtra("semester", daftarPraktikum.get(positition).getSemester());
+        intent.putExtra("school_year", daftarPraktikum.get(positition).getSchool_year());
+        intent.putExtra("assistant_one", daftarPraktikum.get(positition).getAssistant_one());
+        intent.putExtra("assistant_two", daftarPraktikum.get(positition).getAssistant_two());
+        intent.putExtra("lecture", daftarPraktikum.get(positition).getLecture());
+        intent.putExtra("department", daftarPraktikum.get(positition).getDepartment());
+        intent.putExtra("day", daftarPraktikum.get(positition).getDay());
+        intent.putExtra("start_time", daftarPraktikum.get(positition).getStart_time());
+        intent.putExtra("end_time", daftarPraktikum.get(positition).getEnd_time());
+        intent.putExtra("name_image", daftarPraktikum.get(positition).getName_image());
+        intent.putExtra("url_image", daftarPraktikum.get(positition).getUrl_image());
+        intent.putExtra("created_at", daftarPraktikum.get(positition).getCreated_at());
+        intent.putExtra("updated_at", daftarPraktikum.get(positition).getUpdated_at());
+        startActivity(intent);
     }
 
     @Override

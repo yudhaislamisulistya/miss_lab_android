@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.luseen.spacenavigation.SpaceItem;
 import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
@@ -87,6 +89,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void goNotificationScreen(View view){
         startActivity(new Intent(this, NotificationActivity.class));
+    }
+
+    public void goLoginScreen(View view){
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(this, Login.class));
+        finish();
     }
 
 
