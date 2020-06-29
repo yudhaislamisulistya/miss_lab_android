@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.leadevs.misslab.R;
 import com.leadevs.misslab.models.Absen;
+import com.leadevs.misslab.models.Praktikum;
 
 import java.util.List;
 
@@ -19,11 +20,11 @@ import java.util.List;
 public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.MyViewHolder> {
 
     private Context context ;
-    private List<Absen> mData;
+    private List<Praktikum> mData;
     private OnAbsenListener onAbsenListener;
 
 
-    public AbsenAdapter(Context context, List<Absen> mData, OnAbsenListener onAbsenListener) {
+    public AbsenAdapter(Context context, List<Praktikum> mData, OnAbsenListener onAbsenListener) {
         this.context = context;
         this.mData = mData;
         this.onAbsenListener = onAbsenListener;
@@ -39,11 +40,9 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        myViewHolder.TVStatusAbsen.setText(mData.get(i).getStatus());
-        myViewHolder.TVNamaPraktikum.setText(mData.get(i).getNamaPraktikum());
-        myViewHolder.TVMulaiAkhirPraktikum.setText(mData.get(i).getMulaiAkhirPraktikum());
-        myViewHolder.TVRuanganPraktikum.setText(mData.get(i).getRuanganPraktikum());
-        myViewHolder.TVNamaSekarang.setText(mData.get(i).getNamaSekarang());
+        myViewHolder.TVNamaPraktikum.setText(mData.get(i).getName());
+        myViewHolder.TVMulaiAkhirPraktikum.setText(mData.get(i).getDay() + ", " + mData.get(i).getStart_time() + " - " + mData.get(i).getEnd_time());
+        myViewHolder.TVRuanganPraktikum.setText(mData.get(i).getClass_room());
     }
 
     @Override
@@ -54,22 +53,18 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.MyViewHolder
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
-        private TextView TVStatusAbsen;
         private TextView TVNamaPraktikum;
         private TextView TVMulaiAkhirPraktikum;
         private TextView TVRuanganPraktikum;
-        private TextView TVNamaSekarang;
         private OnAbsenListener onAbsenListener;
 
 
         public MyViewHolder(@NonNull View itemView, OnAbsenListener onAbsenListener ) {
 
             super(itemView);
-            TVStatusAbsen = itemView.findViewById(R.id.TVStatusAbsen);
             TVNamaPraktikum = itemView.findViewById(R.id.TVNamaPraktikum);
             TVMulaiAkhirPraktikum = itemView.findViewById(R.id.TVMulaiAkhirPraktikum);
             TVRuanganPraktikum = itemView.findViewById(R.id.TVRuanganPraktikum);
-            TVNamaSekarang = itemView.findViewById(R.id.TVNamaSekarang);
             this.onAbsenListener = onAbsenListener;
             itemView.setOnClickListener(this);
         }

@@ -11,9 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,16 +27,23 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 import com.leadevs.misslab.adapters.AsistenAdapter;
 import com.leadevs.misslab.adapters.DosenAdapter;
-import com.leadevs.misslab.adapters.PraktikumAdapter;
 import com.leadevs.misslab.adapters.PraktikumHomeAdapter;
 import com.leadevs.misslab.models.Asisten;
 import com.leadevs.misslab.models.Dosen;
 import com.leadevs.misslab.models.Praktikum;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 public class HomeFragment extends Fragment {
     private RecyclerView RVPraktikum, RVDosen, RVAsisten;
@@ -42,11 +53,15 @@ public class HomeFragment extends Fragment {
     CollectionReference collectionReferenceDosen = db.collection("lectures");
     CollectionReference collectionReferenceAsisten = db.collection("assistants");
     CollectionReference collectionReferenceUser = db.collection("users");
+    CollectionReference collectionReferenceActiveLab = db.collection("actives_lab");
     ProgressDialog progressDialog;
     PraktikumHomeAdapter praktikumHomeAdapter;
     AsistenAdapter asistenAdapter;
     DosenAdapter dosenAdapter;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    Switch SHomeFragmentStatusActive;
+    String uuid;
+    String status_active = "Tidak Ada";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -57,15 +72,86 @@ public class HomeFragment extends Fragment {
         RVAsisten = root.findViewById(R.id.RVItemAsisten);
         TVHomeFragmentNamaLengkap = root.findViewById(R.id.TVHomeFragmentNamaLengkap);
         TVHomeFragmentStatus = root.findViewById(R.id.TVHomeFragmentStatus);
+        SHomeFragmentStatusActive = root.findViewById(R.id.SHomeFragmentStatusActive);
         progressDialog = new ProgressDialog(getContext());
         updateNamaLengkapDanStatus(user.getUid());
         setUpRecycleViewPraktikum();
         setUpRecycleViewAsisten();
         setUpRecycleViewDosen();
+
+
+
+        String status = getStatusIdActiveLab(user.getUid());
+
+        if (status.equals("Ada")){
+            SHomeFragmentStatusActive.setChecked(true);
+        }else{
+            SHomeFragmentStatusActive.setChecked(false);
+        }
+
+        SHomeFragmentStatusActive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (SHomeFragmentStatusActive.isChecked()) {
+                    updateStatusActiveLabAsisten(user.getUid(), "Ada");
+                } else {
+                    updateStatusActiveLabAsisten(user.getUid(), "Tidak Ada");
+                }
+            }
+        });
         return root;
     }
 
-    public void updateNamaLengkapDanStatus(String id){
+    public void updateStatusActiveLabAsisten(String id, String status) {
+        Map<String, String> statusMap = new HashMap<>();
+        statusMap.put("status_active", status);
+        progressDialog.setTitle("Proses Ubah");
+        progressDialog.show();
+        collectionReferenceActiveLab
+                .document(id)
+                .set(statusMap, SetOptions.merge())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        progressDialog.dismiss();
+                        Toast.makeText(getContext(), "Status Berhasil Diubah",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(), "Status Gagal Diubah",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    public String getStatusIdActiveLab(String id) {
+        collectionReferenceActiveLab
+                .whereEqualTo("id", id)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            progressDialog.dismiss();
+                            int i = 0;
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                status_active = document.getData().get("status_active").toString();
+                            }
+                        } else {
+                            progressDialog.dismiss();
+                            System.out.println(task.getException());
+                        }
+                    }
+                });
+        return status_active;
+    }
+
+
+
+    public void updateNamaLengkapDanStatus(String id) {
         collectionReferenceUser
                 .whereEqualTo("id", id)
                 .get()
@@ -87,7 +173,7 @@ public class HomeFragment extends Fragment {
                 });
     }
 
-    public void setUpRecycleViewDosen(){
+    public void setUpRecycleViewDosen() {
         progressDialog.setTitle("Loading Data");
         progressDialog.show();
         collectionReferenceDosen
@@ -124,7 +210,7 @@ public class HomeFragment extends Fragment {
                 });
     }
 
-    public void setUpRecycleViewAsisten(){
+    public void setUpRecycleViewAsisten() {
         progressDialog.setTitle("Loading Data");
         progressDialog.show();
         collectionReferenceAsisten
