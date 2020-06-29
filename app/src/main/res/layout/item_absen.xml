@@ -9,16 +9,6 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/TVStatusAbsen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shape_belum_absen"
-        android:padding="8dp"
-        android:text="Belum Absen"
-        android:textSize="10dp"/>
-
-
-    <TextView
         android:id="@+id/TVNamaPraktikum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,13 +45,6 @@
                 android:layout_height="wrap_content"
                 android:text="Lab RPL"
                 android:textColor="@color/colorGrey"
-                android:fontFamily="@font/kanit_regular"/>
-            <TextView
-                android:id="@+id/TVNamaSekarang"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yudha Islami Sulistya"
-                android:textColor="@color/colorWhite"
                 android:fontFamily="@font/kanit_regular"/>
         </LinearLayout>
 

@@ -69,7 +69,7 @@ public class DetailPraktikum extends AppCompatActivity {
         progressDialog.show();
 
         collectionReferenceAsisten
-                .whereEqualTo("stambuk", getIntent().getStringExtra("assistant_one"))
+                .whereEqualTo("id_user", getIntent().getStringExtra("assistant_one"))
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -87,7 +87,7 @@ public class DetailPraktikum extends AppCompatActivity {
                 });
 
         collectionReferenceAsisten
-                .whereEqualTo("stambuk", getIntent().getStringExtra("assistant_two"))
+                .whereEqualTo("id_user", getIntent().getStringExtra("assistant_two"))
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

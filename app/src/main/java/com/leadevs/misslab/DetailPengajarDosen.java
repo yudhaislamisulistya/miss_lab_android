@@ -60,7 +60,7 @@ public class DetailPengajarDosen extends AppCompatActivity implements PraktikumA
         RVDetailPengajar = findViewById(R.id.RVItemDetailPengajarDosen);
 
         collectionReference
-                .whereEqualTo("lecture", getIntent().getStringExtra("nidn"))
+                .whereEqualTo("lecture", getIntent().getStringExtra("id_user"))
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

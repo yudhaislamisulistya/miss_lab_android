@@ -70,7 +70,7 @@ public class DetailPengajarAsisten extends AppCompatActivity implements Praktiku
 
 
         collectionReference
-                .whereEqualTo("assistant_one", getIntent().getStringExtra("stambuk"))
+                .whereEqualTo("assistant_one", getIntent().getStringExtra("id_user"))
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -118,7 +118,7 @@ public class DetailPengajarAsisten extends AppCompatActivity implements Praktiku
                 });
 
         collectionReference
-                .whereEqualTo("assistant_two", getIntent().getStringExtra("stambuk"))
+                .whereEqualTo("assistant_two", getIntent().getStringExtra("id_user"))
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

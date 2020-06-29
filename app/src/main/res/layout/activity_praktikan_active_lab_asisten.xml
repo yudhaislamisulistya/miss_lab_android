@@ -29,7 +29,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Asisten"
+                    android:text="Ketersediaan Asisten"
                     android:fontFamily="@font/kanit_bold"
                     android:textColor="@color/colorWhite"
                     android:layout_marginLeft="10dp"

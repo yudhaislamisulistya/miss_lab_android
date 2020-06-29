@@ -78,4 +78,10 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.MyViewHolder
     public  interface OnAbsenListener{
         void onAbsenListener(int positition);
     }
+
+    public void removeItem(int position){
+        mData.remove(position);
+        this.notifyItemRemoved(position);
+
+    }
 }

@@ -19,7 +19,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Absen Hari Ini"
+                android:text="Absen Saat Ini"
                 android:fontFamily="@font/kanit_bold"
                 android:textColor="@color/colorWhite"
                 android:layout_marginLeft="20dp"

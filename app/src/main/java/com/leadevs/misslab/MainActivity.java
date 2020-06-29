@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         spaceNavigationView.addSpaceItem(new SpaceItem("", R.drawable.ic_baseline_meeting_room_24));
         spaceNavigationView.addSpaceItem(new SpaceItem("", R.drawable.ic_baseline_people_alt_24));
         spaceNavigationView.addSpaceItem(new SpaceItem("", R.drawable.ic_baseline_all_inbox_24));
+        new Notification();
 
 
 
